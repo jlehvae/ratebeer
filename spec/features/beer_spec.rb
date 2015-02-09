@@ -10,7 +10,7 @@ describe "Beer" do
   it "can be created with a valid name" do
     sign_in(username:"Pekka", password:"Foobar1")
     visit new_beer_path
-    save_and_open_page
+    #save_and_open_page
     fill_in('beer[name]', with: 'olut')
 
     expect{
