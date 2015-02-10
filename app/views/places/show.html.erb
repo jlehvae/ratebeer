@@ -1,0 +1,11 @@
+<h1><%= @place.name %></h1>
+
+<p>
+  <%= @place.street %>
+</p>
+
+<p>
+  <%= "#{@place.city} #{@place.zip}" %>
+</p>
+
+<img src="<%= "#{@place.to_google_map_image_s}" %>" />
