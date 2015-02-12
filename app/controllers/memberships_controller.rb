@@ -1,5 +1,5 @@
 class MembershipsController < ApplicationController
-  before_action :set_membership, only: [:show, :edit, :update, :destroy]
+  before_action :set_membership, only: [:show, :edit, :update] # , :destroy
 
   # GET /memberships
   # GET /memberships.json
@@ -58,9 +58,10 @@ class MembershipsController < ApplicationController
   # DELETE /memberships/1
   # DELETE /memberships/1.json
   def destroy
+    @membership = current_user.memberships.find_by(beer_club_id: params[:membership][:beer_club_id])
     @membership.destroy
     respond_to do |format|
-      format.html { redirect_to memberships_url, notice: 'Membership was successfully destroyed.' }
+      format.html { redirect_to user_path(current_user), notice: "Membership in #{BeerClub.find_by(id: @membership.beer_club_id).name} beerclub ended" }
       format.json { head :no_content }
     end
   end

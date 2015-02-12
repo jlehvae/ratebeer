@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :memberships
+  delete 'memberships', to: 'memberships#destroy'
 
   resources :beer_clubs
 
