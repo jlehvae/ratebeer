@@ -69,6 +69,9 @@ describe User do
 
   describe "favorite_style" do
     let(:user){FactoryGirl.create(:user) }
+    let(:lager){FactoryGirl.create(:style)}
+    let(:stout){FactoryGirl.create(:style, name: "stout")}
+    let(:ipa){FactoryGirl.create(:style, name: "IPA")}
 
     it "has method for determining one" do
       expect(user).to respond_to :favorite_style
@@ -81,13 +84,13 @@ describe User do
     it "is the style if only one beer rated" do
       beer = create_beer_with_rating(10, user)
 
-      expect(user.favorite_style).to eq(beer.style)
+      expect(user.favorite_style).to eq(beer.style.name)
     end
 
     it "is the one with highest rating if several rated" do
-      create_beers_with_ratings_and_style(10, 20, 15, 7, 1, user, 'stout')
-      create_beers_with_ratings_and_style(10, 20, 15, 7, 9, user, 'IPA')
-      create_beers_with_ratings_and_style(10, 20, 15, 7, 8, user, 'Lager')
+      create_beers_with_ratings_and_style(10, 20, 15, 7, 1, user, stout)
+      create_beers_with_ratings_and_style(10, 20, 15, 7, 9, user, ipa)
+      create_beers_with_ratings_and_style(10, 20, 15, 7, 8, user, lager)
 
       expect(user.favorite_style).to eq('IPA')
     end
