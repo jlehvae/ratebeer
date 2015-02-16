@@ -65,3 +65,7 @@ group :test do
   gem 'webmock'
 end
 
+gem 'bootstrap-sass'
+group :development do
+  gem 'rails_layout'
+end
