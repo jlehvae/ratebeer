@@ -18,7 +18,7 @@
         <td><%= style.description %></td>
         <td><%= link_to 'Show', style %></td>
         <td><%= link_to 'Edit', edit_style_path(style) %></td>
-        <td><%= link_to 'Destroy', style, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Destroy', style, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +26,4 @@
 
 <br>
 
-<%= link_to 'New Style', new_style_path %>
+<%= link_to 'New Style', new_style_path, class:'btn btn-primary' %>
