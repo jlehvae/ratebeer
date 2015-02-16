@@ -12,6 +12,9 @@ class Brewery < ActiveRecord::Base
 
   validate :year_not_in_future
 
+  scope :active, -> { where active: true }
+  scope :retired, -> { where active: [nil,false] }
+
   def year_not_in_future
     if year > Time.now.year
       errors.add(:year, "year can not be in the future")
