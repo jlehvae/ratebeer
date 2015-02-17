@@ -8,7 +8,7 @@
 <% if @beer.ratings.empty? %>
     <p>beer has not yet been rated!</p>
 <% else %>
-    <p>has been rated <%= @beer.ratings.count %> times, average score <%= @beer.average_rating %></p>
+    <p>has been rated <%= @beer.ratings.count %> times, average score <%= round(@beer.average_rating) %></p>
 <% end %>
 
 <% if current_user %>

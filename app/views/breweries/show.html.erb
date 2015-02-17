@@ -24,7 +24,7 @@
   <% if @brewery.ratings.empty? %>
       Brewery has not yet been rated!
   <% else %>
-      <%= "Has #{pluralize(@brewery.ratings.count, 'rating')}, average #{@brewery.average_rating}" %>
+      <%= "Has #{pluralize(@brewery.ratings.count, 'rating')}, average #{round(@brewery.average_rating)}" %>
   <% end %>
 </p>
 
