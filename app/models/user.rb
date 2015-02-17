@@ -19,6 +19,10 @@ class User < ActiveRecord::Base
   validates_format_of :password, with: /(?=.*[\d])/, message: "password must contain at least one digit"
   validates_format_of :password, with: /(?=.*[A-ZÅÄÖ])/, message: "password must contain at least one upper case letter"
 
+  def self.most_active_raters(n)
+    all.sort_by{ |u| -(u.ratings.count||0)}.first(n)
+  end
+
   def favorite_beer
     return nil if ratings.empty?
     # ratings.sort_by{ |r| r.score }.last.beer

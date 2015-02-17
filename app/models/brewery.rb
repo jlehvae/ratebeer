@@ -15,6 +15,10 @@ class Brewery < ActiveRecord::Base
   scope :active, -> { where active: true }
   scope :retired, -> { where active: [nil,false] }
 
+  def self.top(n)
+    all.sort_by{ |b| -(b.average_rating||0) }.take(n)
+  end
+
   def year_not_in_future
     if year > Time.now.year
       errors.add(:year, "year can not be in the future")
