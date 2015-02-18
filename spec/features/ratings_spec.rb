@@ -24,20 +24,6 @@ describe "Rating" do
     expect(beer1.average_rating).to eq(15.0)
   end
 
-  it "count is shown on ratings page" do
-    visit ratings_path
-    expect(page).to have_content('Number of ratings: 0')
-
-    FactoryGirl.create(:rating, beer:beer1, user:user)
-    FactoryGirl.create(:rating, beer:beer2, user:user)
-
-    visit ratings_path
-
-    expect(page).to have_content('Number of ratings: 2')
-    expect(page).to have_content('iso 3')
-    expect(page).to have_content('Karhu')
-  end
-
   it "is removed when user deletes it" do
     FactoryGirl.create(:rating, beer:beer1, user:user)
 
