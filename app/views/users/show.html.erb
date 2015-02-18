@@ -3,6 +3,9 @@
 <p>
   <strong>Username:</strong>
   <%= @user.username %>
+  <% if @user.disabled %>
+      <span class="label label-info">frozen</span>
+  <% end %>
 </p>
 
 <p>
@@ -50,6 +53,10 @@
       </ul>
   <% end %>
   </p>
+
+  <% if current_user && current_user.admin %>
+    <%= link_to (@user.disabled ? "enable account" : "freeze account"), toggle_frozen_user_path(@user), method: :post, class: "btn btn-primary" %>
+  <% end %>
 
   <% if @user == current_user %>
       <%= link_to 'Destroy',@user, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %> |
