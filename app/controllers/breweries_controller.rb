@@ -8,6 +8,17 @@ class BreweriesController < ApplicationController
   def index
     @active_breweries = Brewery.active
     @retired_breweries = Brewery.retired
+
+    order = params[:order] || 'name'
+
+    case order
+               when 'name' then
+                 @active_breweries = @active_breweries.sort_by { |b| b.name }
+                 @retired_breweries = @retired_breweries.sort_by { |b| b.name }
+               when 'year' then
+                 @active_breweries = @active_breweries.sort_by { |b| b.year }
+                 @retired_breweries = @retired_breweries.sort_by { |b| b.year }
+             end
   end
 
   # GET /breweries/1
