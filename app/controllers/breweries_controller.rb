@@ -11,14 +11,26 @@ class BreweriesController < ApplicationController
 
     order = params[:order] || 'name'
 
+    if session[:sort] && session[:sort] == 1
+      session[:sort] = -1
+    else
+      session[:sort] = 1
+    end
+
     case order
-               when 'name' then
-                 @active_breweries = @active_breweries.sort_by { |b| b.name }
-                 @retired_breweries = @retired_breweries.sort_by { |b| b.name }
-               when 'year' then
-                 @active_breweries = @active_breweries.sort_by { |b| b.year }
-                 @retired_breweries = @retired_breweries.sort_by { |b| b.year }
-             end
+      when 'name' then
+        @active_breweries = @active_breweries.sort_by { |b| b.name.downcase }
+        @retired_breweries = @retired_breweries.sort_by { |b| b.name.downcase }
+      when 'year' then
+        @active_breweries = @active_breweries.sort_by { |b| b.year}
+        @retired_breweries = @retired_breweries.sort_by { |b| b.year}
+    end
+
+    if session[:sort] == -1
+      @active_breweries = @active_breweries.reverse
+      @retired_breweries = @retired_breweries.reverse
+    end
+
   end
 
   # GET /breweries/1
@@ -85,14 +97,14 @@ class BreweriesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_brewery
-      @brewery = Brewery.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_brewery
+    @brewery = Brewery.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def brewery_params
-      params.require(:brewery).permit(:name, :year, :active)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def brewery_params
+    params.require(:brewery).permit(:name, :year, :active)
+  end
 
 end
