@@ -43,4 +43,24 @@ describe "beerlist page" do
     find('table').find('tr:nth-child(3)').should have_content('Lechte Weisse')
     find('table').find('tr:nth-child(4)').should have_content('Nikolai')
   end
+
+  it "has sort option that sorts beers by style", js: true do
+    visit beerlist_path
+
+    page.find_link("style").click
+
+    find('table').find('tr:nth-child(2)').should have_content('Lager')
+    find('table').find('tr:nth-child(3)').should have_content('Rauchbier')
+    find('table').find('tr:nth-child(4)').should have_content('Weizen')
+  end
+
+  it "has sort option that sorts beers by brewery", js: true do
+    visit beerlist_path
+
+    page.find_link("brewery").click
+
+    find('table').find('tr:nth-child(2)').should have_content('Ayinger')
+    find('table').find('tr:nth-child(3)').should have_content('Koff')
+    find('table').find('tr:nth-child(4)').should have_content('Schlenkerla')
+  end
 end
