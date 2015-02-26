@@ -1,9 +1,12 @@
 class BeersController < ApplicationController
   before_action :set_beer, only: [:show, :edit, :update, :destroy]
-  before_action :ensure_that_signed_in, except: [:index, :show, :list]
+  before_action :ensure_that_signed_in, except: [:index, :show, :list, :nglist]
   before_action :has_admin_role, only: [:destroy]
 
   def list
+  end
+
+  def nglist
   end
 
   # GET /beers

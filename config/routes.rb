@@ -16,6 +16,9 @@ Rails.application.routes.draw do
 
   resources :beers
   get 'beerlist', to:'beers#list'
+  get 'ngbeerlist', to:'beers#nglist'
+
+  get 'brewerylist', to:'breweries#brewerylist'
 
   resources :breweries do
     post 'toggle_activity', on: :member
