@@ -1,7 +1,5 @@
 <h1>Sign in</h1>
 
-<p id="notice"><%= notice %></p>
-
 <%= form_tag session_path, class: 'navbar-form' do %>
     <div class="form-group">
         <%= text_field_tag :username, params[:username], class: "form-control", placeholder: "username" %>

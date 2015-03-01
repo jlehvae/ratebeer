@@ -39,4 +39,12 @@ class User < ActiveRecord::Base
     beers.group(:brewery).average(:score).max_by { |name, score| score }.first
   end
 
+  def confirmed_in
+    memberships.is_confirmed.collect { |m| m.beer_club }
+  end
+
+  def applicant_in
+    memberships.is_applicant.collect { |m| m.beer_club }
+  end
+
 end

@@ -1,5 +1,5 @@
 class MembershipsController < ApplicationController
-  before_action :set_membership, only: [:show, :edit, :update] # , :destroy
+  before_action :set_membership, only: [:show, :edit, :update, :confirm_member] # , :destroy
 
   # GET /memberships
   # GET /memberships.json
@@ -20,6 +20,16 @@ class MembershipsController < ApplicationController
 
   # GET /memberships/1/edit
   def edit
+  end
+
+  def confirm_member
+    @beerclub = BeerClub.find(@membership.beer_club_id)
+
+    if @beerclub.is_member?(current_user)
+      @membership.confirmed = true
+      @membership.save
+      redirect_to :back, notice: 'membership confirmed'
+    end
   end
 
   # POST /memberships

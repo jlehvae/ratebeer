@@ -5,4 +5,12 @@ class BeerClub < ActiveRecord::Base
   def to_s
     "#{self.name}, #{self.city}"
   end
+
+  def members
+    memberships.is_confirmed.collect {|m| m.user}
+  end
+
+  def is_member?(user)
+    members.include? user
+  end
 end

@@ -1,9 +1,7 @@
-<p id="notice"><%= notice %></p>
-
 <h1><%= @beer_club.name %>, <%= @beer_club.city %></h1>
 
 <p>
-    Founded: <%= @beer_club.founded %>
+  Founded: <%= @beer_club.founded %>
 </p>
 
 <p>
@@ -13,11 +11,26 @@
     <h2>members</h2>
 
     <ul>
-      <% @beer_club.users.each do |user| %>
-          <li> <%= link_to user.username, user_path(user) %></li>
+      <% @beer_club.memberships.is_confirmed.each do |membership| %>
+          <li> <%= link_to membership.user.username, user_path(membership.user) %></li>
       <% end %>
     </ul>
 <% end %>
+</p>
+
+<p>
+<h2>Outstanding applicants</h2>
+
+<ul>
+  <% @beer_club.memberships.is_applicant.each do |membership| %>
+      <li>
+        <%= link_to membership.user.username, user_path(membership.user) %>
+        <% if @beer_club.is_member? current_user %>
+            <%= link_to 'confirm', confirm_member_membership_path(membership), method: :post, class: 'btn btn-success' %>
+        <% end %>
+      </li>
+  <% end %>
+</ul>
 </p>
 
 <% if current_user and not @beer_club.users.include?(current_user)  %>
