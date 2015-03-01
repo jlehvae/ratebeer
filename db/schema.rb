@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150228191436) do
+ActiveRecord::Schema.define(version: 20150301080547) do
 
   create_table "beer_clubs", force: :cascade do |t|
     t.string   "name"
@@ -69,5 +69,7 @@ ActiveRecord::Schema.define(version: 20150228191436) do
     t.boolean  "enabled"
     t.boolean  "disabled"
   end
+
+  add_index "users", ["username"], name: "index_users_on_username"
 
 end
