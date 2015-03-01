@@ -66,7 +66,6 @@ ActiveRecord::Schema.define(version: 20150301154536) do
     t.datetime "updated_at",      null: false
     t.string   "password_digest"
     t.boolean  "admin"
-    t.boolean  "enabled"
     t.boolean  "disabled"
     t.boolean  "github"
   end

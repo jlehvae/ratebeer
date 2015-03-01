@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
       elsif user && !user.github
         redirect_to signin_path, notice: "username is already taken"
       else
-        githubUser = User.new(username: login, enabled: true, github: true)
+        githubUser = User.new(username: login, disabled: false, github: true)
         githubUser.save(validate: false)
         session[:user_id] = githubUser.id
         redirect_to user_path(githubUser), notice: "Thank you for registering!"
