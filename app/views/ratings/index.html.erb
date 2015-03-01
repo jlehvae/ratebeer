@@ -1,6 +1,6 @@
 <h2>Rating statistics</h2>
 
-<% cache "ratings", skip_digest: true do %>
+<% cache "ratings", :expires_in => 10.minutes, skip_digest: true do %>
 
     <div class="row">
       <div class="col-md-4">

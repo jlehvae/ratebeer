@@ -3,6 +3,26 @@ class SessionsController < ApplicationController
     # renderöi kirjautumissivun
   end
 
+  def create_oauth
+    login = env["omniauth.auth"]["extra"]["raw_info"]["login"]
+
+    if login
+      user = User.find_by username: login
+
+      if user && user.github
+        session[:user_id] = user.id
+        redirect_to user_path(user), notice: "Welcome back!"
+      elsif user && !user.github
+        redirect_to signin_path, notice: "username is already taken"
+      else
+        githubUser = User.new(username: login, enabled: true, github: true)
+        githubUser.save(validate: false)
+        session[:user_id] = githubUser.id
+        redirect_to user_path(githubUser), notice: "Thank you for registering!"
+      end
+    end
+  end
+
   def create
     user = User.find_by username: params[:username]
 
@@ -21,4 +41,5 @@ class SessionsController < ApplicationController
 
     redirect_to :root
   end
+
 end
