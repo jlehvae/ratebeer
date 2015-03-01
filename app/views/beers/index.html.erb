@@ -1,16 +1,16 @@
 <h1>Listing Beers</h1>
 
 <div style="border-style: solid;">
-  beerlist-name: <%= ActionController::Base.new.fragment_exist?( 'beerlist-name' ) %>
+  beerlist-name-html: <%= ActionController::Base.new.fragment_exist?( 'beerlist-name-html' ) %>
   <br>
-  beerlist-style: <%= ActionController::Base.new.fragment_exist?( 'beerlist-style' ) %>
+  beerlist-style-html: <%= ActionController::Base.new.fragment_exist?( 'beerlist-style-html' ) %>
   <br>
-  beerlist-brewery: <%= ActionController::Base.new.fragment_exist?( 'beerlist-brewery' ) %>
+  beerlist-brewery-html: <%= ActionController::Base.new.fragment_exist?( 'beerlist-brewery-html' ) %>
   <br>
   current: <%= "beerlist-#{@order}" %>
 </div>
 
-<% cache "beerlist-#{@order}", skip_digest: true do %>
+<% cache "beerlist-#{@order}-#{@format}", skip_digest: true do %>
 <table class="table table-hover">
   <thead>
   <tr>
