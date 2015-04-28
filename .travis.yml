@@ -17,3 +17,6 @@ deploy:
   on:
     repo: jlehvae/ratebeer
   run: "rake db:migrate"
+addons:
+  code_climate:
+    repo_token: a961eae7
